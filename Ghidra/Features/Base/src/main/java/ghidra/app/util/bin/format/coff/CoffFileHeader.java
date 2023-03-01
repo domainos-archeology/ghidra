@@ -57,7 +57,7 @@ public class CoffFileHeader implements StructConverter {
 	}
 
 	private static BinaryReader getBinaryReader(ByteProvider provider) {
-		BinaryReader reader = new BinaryReader(provider, true/*COFF is always LE!!!*/);
+		BinaryReader reader = new BinaryReader(provider, false /* COFF is not always LE!!!*/);
 		return reader;
 	}
 
