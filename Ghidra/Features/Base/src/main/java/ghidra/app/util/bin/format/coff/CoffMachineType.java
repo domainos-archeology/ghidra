@@ -250,6 +250,11 @@ public class CoffMachineType {
 	public final static short IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x0169;
 
 	/**
+	 * Apollo 68k -- big endian
+	 */
+	public final static short IMAGE_FILE_MACHINE_APOLLO = 0x0197;
+
+	/**
 	 * Checks to see if the given machine type is defined in this file.
 	 * 
 	 * @param type The machine type to check.
