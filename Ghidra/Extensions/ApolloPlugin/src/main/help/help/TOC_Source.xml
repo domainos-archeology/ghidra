@@ -47,4 +47,11 @@
 	
 -->
 <tocroot>
+  <tocref id="Program Search">
+    <tocdef id="Apollo Stuff"
+            text="Apollo Plugin" 
+            target="help/topics/ApolloPlugin/ApolloPlugin.htm"
+            sortgroup="zzz">
+      </tocdef>
+  </tocref>
 </tocroot>
