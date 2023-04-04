@@ -8,5 +8,6 @@ eclipse.project.name = 'Apollo Tools'
 
 dependencies {
 	api project(':Base')
+	helpPath project(path: ":Base", configuration: 'helpPath')
 }
 
