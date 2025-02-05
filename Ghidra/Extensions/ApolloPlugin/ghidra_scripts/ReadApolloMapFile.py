@@ -163,11 +163,25 @@ def import_apollo_map_file(f):
             print("Unknown region type {}".format(region_type))
         mb.setComment("Physical address: {}".format(loaded_at))
 
+    def symbol_is_really_data(name, size):
+        if name.endswith("_$UID"):
+            return True
+        if name.endswith("_UID") and size == 8:
+            return True
+        if name == "UID_$NIL" or name == "ACL_$NIL":
+            return True
+
+        return False
+
     # and now create symbols
     listing = currentProgram.getListing()
     for (symbol_type, address, name, size) in symbols:
         print("SYMBOL: {} {} {} {}".format(symbol_type, address, name, size))
-        if symbol_type == 'I':
+
+        is_function = symbol_type == 'I' and not symbol_is_really_data(name, size)
+        is_data = symbol_type == 'D' or symbol_is_really_data(name, size)
+
+        if is_function:
             func = funcMgr.getFunctionAt(address)
             if func is not None:
                 funcMgr.removeFunction(func.getEntryPoint())
@@ -181,7 +195,7 @@ def import_apollo_map_file(f):
             createFunction(address, name)
     
             print("Creating function {} at {}".format(name, address))
-        elif symbol_type == 'D':
+        elif is_data:
             createLabel(address, name, False)
             print("Created label at {}: {}".format(address, name))
             if size is not None and size > 0:
